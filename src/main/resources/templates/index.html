@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Chat App</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="chat-header">
+            <h1>Real-time Chat</h1>
+            <div class="online-indicator">
+                <span class="indicator"></span>
+                <span class="status-text">Connecting...</span>
+            </div>
+        </div>
+        
+        <div class="chat-container">
+            <form id="userForm" class="user-form">
+                <h2 style="margin-bottom: 1.5rem; text-align: center;">Join Chat</h2>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" autocomplete="off" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Start Chatting</button>
+            </form>
+            
+            <div class="chat-page hidden">
+                <div class="connecting">
+                    Connecting...
+                </div>
+                
+                <div class="chat-area">
+                    <div class="message-list">
+                        <!-- Messages will be added here -->
+                    </div>
+                    <div class="typing-indicator">
+                        Someone is typing...
+                    </div>
+                </div>
+                
+                <form id="chatForm" class="chat-form">
+                    <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control chat-input" required>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>
