@@ -1,12 +1,12 @@
-FROM maven:3.9.6-eclipse-temurin-17-alpine AS build
+FROM maven:3.9.6-eclipse-temurin-17-slim AS builder
 WORKDIR /app
-COPY pom.xml .
-COPY src ./src
-RUN mvn clean package -DskipTests
+COPY /pom.xml  .
+COPY  src ./src 
+RUN mvn clean package -DskipTest
 
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:17-jre-slim
 WORKDIR /app
-COPY --from=build /app/target/chat-app-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=builder /app/target/chat-app-0.0.1-SNAPSHOT.jar tejas.jar
 
 # Create a directory for the sound file
 RUN mkdir -p /app/static/sounds
@@ -16,4 +16,4 @@ RUN mkdir -p /app/static/sounds
 RUN touch /app/static/sounds/message.mp3
 
 EXPOSE 9999
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "tejas.jar"]
